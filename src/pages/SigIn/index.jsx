@@ -1,12 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Header from "../../components/Header";
+import SignInForm from "./SignInForm";
 
 const SignIn = () => {
   return (
     <div>
-      <h1>Cadastro</h1>
-      <Link to="/register/login">Login</Link>
-      <Link to="/home">Home</Link>
+      <Header button="Voltar" />
+      <h3>Crie sua conta</h3>
+      <span>Rapido e grátis, vamos nessa</span>
+      <SignInForm />
     </div>
   );
 };

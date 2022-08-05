@@ -1,12 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Header from "../../components/Header";
+import LoginForm from "./LoginForm";
 
 const Login = () => {
   return (
     <div>
-      <h1>Login</h1>
-      <Link to="/register/sigIn">Cadastro</Link>
-      <Link to="/home">Home</Link>
+      <Header />
+      <h3>Login</h3>
+      <LoginForm button="Entrar" />
+      <span>Ainda não possui uma conta?</span>
+      <button>Cadastre-se</button>
     </div>
   );
 };
