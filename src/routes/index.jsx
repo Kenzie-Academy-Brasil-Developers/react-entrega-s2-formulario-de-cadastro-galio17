@@ -10,7 +10,7 @@ const RoutesMain = () => {
       <Route path="register">
         <Route index element={<Navigate replace to="login" />} />
         <Route index path="login" element={<Login />} />
-        <Route path="sigIn" element={<SignIn />} />
+        <Route path="signIn" element={<SignIn />} />
       </Route>
       <Route path="home" element={<Home />} />
       <Route path="*" element={<Navigate replace to="/register/login" />} />

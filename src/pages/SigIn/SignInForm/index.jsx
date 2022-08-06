@@ -1,24 +1,44 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import React from "react";
-import Select from "../../../components/SelectForm";
-import { moduleOptions } from "../../../components/SelectForm/options";
+import { useForm } from "react-hook-form";
+import {
+  FormInput,
+  FormSelect,
+  moduleOptions,
+  SignInSchema,
+} from "../../../components/FormFields";
 
 const SignInForm = () => {
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(SignInSchema),
+  });
+
+  console.log(errors);
+
   return (
-    <form>
-      <label htmlFor="name">Nome</label>
-      <input type="text" id="name" />
-      <label htmlFor="email">Email</label>
-      <input type="text" id="email" />
-      <label htmlFor="password">Senha</label>
-      <input type="text" id="password" />
-      <label htmlFor="confirmPassword">Confirmar Senha</label>
-      <input type="text" id="confirmPassword" />
-      <label htmlFor="bio">Bio</label>
-      <input type="text" id="bio" />
-      <label htmlFor="contact">Contato</label>
-      <input type="text" id="contact" />
-      <label htmlFor="course_module">Selecionar Módulo</label>
-      <Select options={moduleOptions} type="text" id="course_module" />
+    <form onSubmit={handleSubmit((formData) => console.log(formData))}>
+      <FormInput type="text" id="name" label="Nome" register={register} />
+      <FormInput type="text" id="email" label="Email" register={register} />
+      <FormInput type="text" id="password" label="Senha" register={register} />
+      <FormInput
+        type="text"
+        id="confirmPassword"
+        label="Confirmar Senha"
+        register={register}
+      />
+      <FormInput type="text" id="bio" label="Bio" register={register} />
+      <FormInput type="text" id="contact" label="Contato" register={register} />
+      <FormSelect
+        id="course_module"
+        label="Selecionar Módulo"
+        options={moduleOptions}
+        control={control}
+      />
       <button type="submit">Cadastrar</button>
     </form>
   );

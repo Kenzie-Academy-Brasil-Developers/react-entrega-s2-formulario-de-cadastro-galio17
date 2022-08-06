@@ -7,7 +7,7 @@ const Login = () => {
     <div>
       <Header />
       <h3>Login</h3>
-      <LoginForm button="Entrar" />
+      <LoginForm />
       <span>Ainda não possui uma conta?</span>
       <button>Cadastre-se</button>
     </div>
