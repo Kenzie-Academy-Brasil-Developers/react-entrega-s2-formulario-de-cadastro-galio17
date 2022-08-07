@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 
 const Home = () => {
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("@kenzie-hub:user")));
+  }, []);
+
   return (
     <div>
-      <Header button="Sair" />
+      <Header button="Sair" onClick={() => localStorage.clear()} />
       <section>
-        <h2>Olá, Usuário</h2>
-        <span>Primeiro módulo (Introdução ao Frontend)</span>
+        <h2>Olá, {user.name}</h2>
+        <span>{user.course_module}</span>
       </section>
       <main>
         <strong>Que pena! Estamos em desenvolvimento :(</strong>
