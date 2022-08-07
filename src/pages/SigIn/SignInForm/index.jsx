@@ -1,14 +1,32 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import {
   FormInput,
   FormSelect,
   moduleOptions,
   SignInSchema,
 } from "../../../components/FormFields";
+import api from "../../../components/services";
 
 const SignInForm = () => {
+  function submitSignIn(formData) {
+    api
+      .post("users", formData)
+      .then((response) => {
+        api.post("sessions", formData).then(({ data: { user, token } }) => {
+          localStorage.clear();
+          localStorage.setItem("@kenzie-hub:user", JSON.stringify(user));
+          localStorage.setItem("@kenzie-hub:token", JSON.stringify(token));
+          navigate("/home");
+        });
+      })
+      .catch((error) => console.error(error));
+  }
+
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -21,12 +39,17 @@ const SignInForm = () => {
   console.log(errors);
 
   return (
-    <form onSubmit={handleSubmit((formData) => console.log(formData))}>
+    <form onSubmit={handleSubmit(submitSignIn)}>
       <FormInput type="text" id="name" label="Nome" register={register} />
       <FormInput type="text" id="email" label="Email" register={register} />
-      <FormInput type="text" id="password" label="Senha" register={register} />
       <FormInput
-        type="text"
+        type="password"
+        id="password"
+        label="Senha"
+        register={register}
+      />
+      <FormInput
+        type="password"
         id="confirmPassword"
         label="Confirmar Senha"
         register={register}
