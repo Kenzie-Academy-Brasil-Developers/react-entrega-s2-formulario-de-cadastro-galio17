@@ -41,6 +41,7 @@ const LoginForm = () => {
         id="password"
         type="password"
         label="Senha"
+        seeButton
         register={register}
         error={errors.password?.message}
       />

@@ -13,14 +13,17 @@ export const SignInSchema = yup.object().shape({
     .required()
     .min(6, "Minímo 6 caracteres")
     .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[%$&!@#*.])[a-zA-Z\d%$&!@#*.]*$/,
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[%$&!@#*.]).*$/,
       "Senha deve conter pelo menos 1 letra maiúscula e minúscula, número e carácter especial (%$&!@#*.)"
     ),
   confirmPassword: yup
     .string()
     .required("Confirmação de senha obrigatória")
     .oneOf([yup.ref("password")], "Deve ser igual a senha"),
-  bio: yup.string().required("Bio obrigatória"),
+  bio: yup
+    .string()
+    .required("Bio obrigatória")
+    .max(400, "Máximo 400 caracteres"),
   contact: yup.string().required("Contato obrigatório"),
   course_module: yup.string().required("Módulo obrigatório"),
 });

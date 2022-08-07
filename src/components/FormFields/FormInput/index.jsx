@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const FormInput = ({ id, type, label, register, error }) => {
+export const FormInput = ({ id, type, label, seeButton, register, error }) => {
   const [seePassword, setSeePassword] = useState(false);
 
   return (
@@ -8,9 +8,9 @@ export const FormInput = ({ id, type, label, register, error }) => {
       <label htmlFor={id}>{label}</label>
       <div>
         <input id={id} type={seePassword ? "text" : type} {...register(id)} />
-        {(type === "password" || error) && (
+        {(seeButton || error) && (
           <div>
-            {type === "password" && (
+            {seeButton && (
               <button
                 type="button"
                 onClick={(e) => {
