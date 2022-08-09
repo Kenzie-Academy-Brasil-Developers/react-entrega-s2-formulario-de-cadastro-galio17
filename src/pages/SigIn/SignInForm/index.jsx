@@ -9,6 +9,8 @@ import {
   SignInSchema,
 } from "../../../components/FormFields";
 import api from "../../../components/services";
+import Button from "../../../styles/button";
+import { FormContainer, ThemeContainer } from "../../../styles/containers";
 
 const SignInForm = () => {
   function submitSignIn(formData) {
@@ -36,34 +38,74 @@ const SignInForm = () => {
     resolver: yupResolver(SignInSchema),
   });
 
-  console.log(errors);
-
   return (
-    <form onSubmit={handleSubmit(submitSignIn)}>
-      <FormInput type="text" id="name" label="Nome" register={register} />
-      <FormInput type="text" id="email" label="Email" register={register} />
-      <FormInput
-        type="password"
-        id="password"
-        label="Senha"
-        register={register}
-      />
-      <FormInput
-        type="password"
-        id="confirmPassword"
-        label="Confirmar Senha"
-        register={register}
-      />
-      <FormInput type="text" id="bio" label="Bio" register={register} />
-      <FormInput type="text" id="contact" label="Contato" register={register} />
-      <FormSelect
-        id="course_module"
-        label="Selecionar Módulo"
-        options={moduleOptions}
-        control={control}
-      />
-      <button type="submit">Cadastrar</button>
-    </form>
+    <ThemeContainer>
+      <div className="container">
+        <h3>Crie sua conta</h3>
+        <span>Rapido e grátis, vamos nessa</span>
+        <FormContainer onSubmit={handleSubmit(submitSignIn)}>
+          <FormInput
+            type="text"
+            id="name"
+            placeholder="Digite seu nome"
+            label="Nome"
+            register={register}
+            error={errors}
+          />
+          <FormInput
+            type="text"
+            id="email"
+            placeholder="Digite seu email"
+            label="Email"
+            register={register}
+            error={errors}
+          />
+          <FormInput
+            type="password"
+            id="password"
+            placeholder="Digite sua senha"
+            label="Senha"
+            register={register}
+            error={errors}
+          />
+          <FormInput
+            type="password"
+            id="confirmPassword"
+            placeholder="Digite novamente sua senha"
+            label="Confirmar Senha"
+            register={register}
+            error={errors}
+          />
+          <FormInput
+            type="text"
+            id="bio"
+            placeholder="Fale sobre você"
+            label="Bio"
+            register={register}
+            error={errors}
+          />
+          <FormInput
+            type="text"
+            id="contact"
+            placeholder="Opção de contato"
+            label="Contato"
+            register={register}
+            error={errors}
+          />
+          <FormSelect
+            id="course_module"
+            placeholder="Módulo atual"
+            label="Selecionar Módulo"
+            options={moduleOptions}
+            control={control}
+            error={errors}
+          />
+          <Button size="big" theme="primary" type="submit">
+            Cadastrar
+          </Button>
+        </FormContainer>
+      </div>
+    </ThemeContainer>
   );
 };
 

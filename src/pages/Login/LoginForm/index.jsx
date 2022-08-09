@@ -3,7 +3,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormInput, loginSchema } from "../../../components/FormFields";
 import api from "../../../components/services";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Button from "../../../styles/button";
+import { FormContainer, ThemeContainer } from "../../../styles/containers";
 
 const LoginForm = () => {
   function submitLogin(formData) {
@@ -29,24 +31,41 @@ const LoginForm = () => {
   });
 
   return (
-    <form onSubmit={handleSubmit(submitLogin)}>
-      <FormInput
-        id="email"
-        type="text"
-        label="Email"
-        register={register}
-        error={errors.email?.message}
-      />
-      <FormInput
-        id="password"
-        type="password"
-        label="Senha"
-        seeButton
-        register={register}
-        error={errors.password?.message}
-      />
-      <button type="submit">Entrar</button>
-    </form>
+    <ThemeContainer>
+      <div className="container">
+        <h3>Login</h3>
+        <FormContainer onSubmit={handleSubmit(submitLogin)}>
+          <FormInput
+            id="email"
+            type="text"
+            placeholder="Digite seu email"
+            label="Email"
+            register={register}
+            error={errors}
+          />
+          <FormInput
+            id="password"
+            type="password"
+            placeholder="Digite sua senha"
+            label="Senha"
+            seeButton
+            register={register}
+            error={errors}
+          />
+          <Button size="big" theme="primary" type="submit">
+            Entrar
+          </Button>
+        </FormContainer>
+        <div className="signIn-container">
+          <span>Ainda não possui uma conta?</span>
+          <Link to="../signIn">
+            <Button size="big" theme="secondary">
+              Cadastre-se
+            </Button>
+          </Link>
+        </div>
+      </div>
+    </ThemeContainer>
   );
 };
 

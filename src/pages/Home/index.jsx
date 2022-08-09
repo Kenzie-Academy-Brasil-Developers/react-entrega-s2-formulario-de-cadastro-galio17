@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
+import { ContentContainer } from "../../styles/containers";
+import HomePage from "./styles";
 
 const Home = () => {
   const [user, setUser] = useState({});
@@ -9,19 +11,23 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <HomePage>
       <Header button="Sair" onClick={() => localStorage.clear()} />
       <section>
-        <h2>Olá, {user.name}</h2>
-        <span>{user.course_module}</span>
+        <ContentContainer>
+          <h2>Olá, {user.name}</h2>
+          <span>{user.course_module}</span>
+        </ContentContainer>
       </section>
       <main>
-        <strong>Que pena! Estamos em desenvolvimento :(</strong>
-        <p>
-          Nossa aplicação está em desenvolvimento, em breve teremos novidades
-        </p>
+        <ContentContainer>
+          <strong>Que pena! Estamos em desenvolvimento :(</strong>
+          <p>
+            Nossa aplicação está em desenvolvimento, em breve teremos novidades
+          </p>
+        </ContentContainer>
       </main>
-    </div>
+    </HomePage>
   );
 };
 

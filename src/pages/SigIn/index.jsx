@@ -1,15 +1,19 @@
 import React from "react";
 import Header from "../../components/Header";
+import { ContentContainer } from "../../styles/containers";
 import SignInForm from "./SignInForm";
+import SignInPage from "./styles";
 
 const SignIn = () => {
   return (
-    <div>
+    <SignInPage>
       <Header button="Voltar" />
-      <h3>Crie sua conta</h3>
-      <span>Rapido e grátis, vamos nessa</span>
-      <SignInForm />
-    </div>
+      <main>
+        <ContentContainer>
+          <SignInForm />
+        </ContentContainer>
+      </main>
+    </SignInPage>
   );
 };
 

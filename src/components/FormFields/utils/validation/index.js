@@ -10,7 +10,7 @@ export const SignInSchema = yup.object().shape({
   email: yup.string().required("Email obrigatório"),
   password: yup
     .string()
-    .required()
+    .required("Senha obrigatória")
     .min(6, "Minímo 6 caracteres")
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[%$&!@#*.]).*$/,
