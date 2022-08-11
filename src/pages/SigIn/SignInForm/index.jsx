@@ -8,7 +8,7 @@ import {
   moduleOptions,
   SignInSchema,
 } from "../../../components/FormFields";
-import api from "../../../components/services";
+import api from "../../../services";
 import Button from "../../../styles/button";
 import { FormContainer, ThemeContainer } from "../../../styles/containers";
 

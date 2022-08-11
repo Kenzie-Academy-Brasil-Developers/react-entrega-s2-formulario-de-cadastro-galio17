@@ -2,10 +2,10 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormInput, loginSchema } from "../../../components/FormFields";
-import api from "../../../components/services";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../../../styles/button";
 import { FormContainer, ThemeContainer } from "../../../styles/containers";
+import api from "../../../services";
 
 const LoginForm = () => {
   function submitLogin(formData) {
