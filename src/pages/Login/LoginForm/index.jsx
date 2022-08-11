@@ -1,26 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormInput, loginSchema } from "../../../components/FormFields";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "../../../styles/button";
 import { FormContainer, ThemeContainer } from "../../../styles/containers";
-import api from "../../../services";
+import { UserContext } from "../../../providers/user";
 
 const LoginForm = () => {
   function submitLogin(formData) {
-    api
-      .post("sessions", formData)
-      .then(({ data: { user, token } }) => {
-        localStorage.clear();
-        localStorage.setItem("@kenzie-hub:user", JSON.stringify(user));
-        localStorage.setItem("@kenzie-hub:token", JSON.stringify(token));
-        navigate("/home");
-      })
-      .catch((error) => console.error(error));
+    try {
+      login(formData);
+    } catch ({ response }) {
+      console.error(response);
+    }
   }
 
-  const navigate = useNavigate();
+  const { login } = useContext(UserContext);
 
   const {
     register,

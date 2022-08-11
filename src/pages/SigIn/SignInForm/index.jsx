@@ -1,33 +1,26 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import {
   FormInput,
   FormSelect,
   moduleOptions,
   SignInSchema,
 } from "../../../components/FormFields";
-import api from "../../../services";
+import { UserContext } from "../../../providers/user";
 import Button from "../../../styles/button";
 import { FormContainer, ThemeContainer } from "../../../styles/containers";
 
 const SignInForm = () => {
   function submitSignIn(formData) {
-    api
-      .post("users", formData)
-      .then((response) => {
-        api.post("sessions", formData).then(({ data: { user, token } }) => {
-          localStorage.clear();
-          localStorage.setItem("@kenzie-hub:user", JSON.stringify(user));
-          localStorage.setItem("@kenzie-hub:token", JSON.stringify(token));
-          navigate("/home");
-        });
-      })
-      .catch((error) => console.error(error));
+    try {
+      sign(formData);
+    } catch ({ response }) {
+      console.error(response);
+    }
   }
 
-  const navigate = useNavigate();
+  const { sign } = useContext(UserContext);
 
   const {
     register,
