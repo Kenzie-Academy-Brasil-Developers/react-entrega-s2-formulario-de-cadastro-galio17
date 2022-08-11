@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import Header from "../../components/Header";
+import { UserContext } from "../../providers/user";
 import { ContentContainer } from "../../styles/containers";
 import HomePage from "./styles";
 
 const Home = () => {
-  const [user, setUser] = useState({});
-
-  useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("@kenzie-hub:user")));
-  }, []);
+  const { user } = useContext(UserContext);
 
   return (
     <HomePage>
