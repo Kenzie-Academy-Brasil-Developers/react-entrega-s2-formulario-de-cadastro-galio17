@@ -1,5 +1,6 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import ProtectedRoutes from "../components/ProtectedRoutes";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import SignIn from "../pages/SigIn";
@@ -12,7 +13,9 @@ const RoutesMain = () => {
         <Route index path="login" element={<Login />} />
         <Route path="signIn" element={<SignIn />} />
       </Route>
-      <Route path="home" element={<Home />} />
+      <Route element={<ProtectedRoutes />}>
+        <Route path="home" element={<Home />} />
+      </Route>
       <Route path="*" element={<Navigate replace to="/register/login" />} />
     </Routes>
   );
