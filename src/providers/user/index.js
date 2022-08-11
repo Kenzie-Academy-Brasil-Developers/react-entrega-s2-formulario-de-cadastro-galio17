@@ -5,8 +5,8 @@ import api from "../../services";
 export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
-  function login(loginData) {
-    api.post("sessions", loginData).then(({ data: { user, token } }) => {
+  async function login(loginData) {
+    await api.post("sessions", loginData).then(({ data: { user, token } }) => {
       api.defaults.headers.authorization = `Bearer ${token}`;
 
       localStorage.removeItem("@kenzie-hub:token");
@@ -17,14 +17,14 @@ const UserProvider = ({ children }) => {
     });
   }
 
-  function signIn(signInData) {
-    api.post("users", signInData).then(() => {
+  async function signIn(signInData) {
+    await api.post("users", signInData).then(() => {
       login(signInData);
     });
   }
 
-  function getProfile() {
-    api.get("profile").then(({ data }) => setUser(data));
+  async function getProfile() {
+    await api.get("profile").then(({ data }) => setUser(data));
   }
 
   const navigate = useNavigate();
@@ -33,19 +33,23 @@ const UserProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = JSON.stringify(localStorage.getItem("@kenzie-hub:token"));
+    async function loadUser() {
+      const token = JSON.parse(localStorage.getItem("@kenzie-hub:token"));
 
-    if (token) {
-      try {
-        api.defaults.headers.authorization = `Bearer ${token}`;
+      if (token) {
+        try {
+          api.defaults.headers.authorization = `Bearer ${token}`;
 
-        getProfile();
-      } catch ({ response }) {
-        console.error(response);
+          await getProfile();
+        } catch ({ response }) {
+          console.error(response);
+        }
       }
+
+      setLoading(false);
     }
 
-    setLoading(false);
+    loadUser();
   }, []);
 
   return (
