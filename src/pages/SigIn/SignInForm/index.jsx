@@ -14,13 +14,13 @@ import { FormContainer, ThemeContainer } from "../../../styles/containers";
 const SignInForm = () => {
   function submitSignIn(formData) {
     try {
-      sign(formData);
+      signIn(formData);
     } catch ({ response }) {
       console.error(response);
     }
   }
 
-  const { sign } = useContext(UserContext);
+  const { signIn } = useContext(UserContext);
 
   const {
     register,
