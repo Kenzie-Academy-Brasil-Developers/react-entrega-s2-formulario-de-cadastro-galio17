@@ -10,7 +10,7 @@ const Header = ({ button, onClick }) => {
       <ContentContainer>
         <h1>Kenzie Hub</h1>
         {button && (
-          <Link to="/register/login">
+          <Link to="/login">
             <Button onClick={onClick}>{button}</Button>
           </Link>
         )}

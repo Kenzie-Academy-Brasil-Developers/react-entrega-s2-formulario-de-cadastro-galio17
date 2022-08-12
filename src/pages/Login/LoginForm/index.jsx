@@ -54,7 +54,7 @@ const LoginForm = () => {
         </FormContainer>
         <div className="signIn-container">
           <span>Ainda não possui uma conta?</span>
-          <Link to="../signIn">
+          <Link to="/register">
             <Button size="big" theme="secondary">
               Cadastre-se
             </Button>
