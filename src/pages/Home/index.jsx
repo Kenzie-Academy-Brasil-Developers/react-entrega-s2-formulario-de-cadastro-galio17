@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
+import { Outlet } from "react-router-dom";
 import Header from "../../components/Header";
 import { UserContext } from "../../providers/user";
 import { ContentContainer } from "../../styles/containers";
 import HomePage from "./styles";
+import TechList from "./TechList";
 
 const Home = () => {
   const { user } = useContext(UserContext);
@@ -16,14 +18,8 @@ const Home = () => {
           <span>{user.course_module}</span>
         </ContentContainer>
       </section>
-      <main>
-        <ContentContainer>
-          <strong>Que pena! Estamos em desenvolvimento :(</strong>
-          <p>
-            Nossa aplicação está em desenvolvimento, em breve teremos novidades
-          </p>
-        </ContentContainer>
-      </main>
+      <TechList />
+      <Outlet />
     </HomePage>
   );
 };
