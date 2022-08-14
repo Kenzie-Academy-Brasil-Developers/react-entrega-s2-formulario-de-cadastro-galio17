@@ -13,7 +13,7 @@ const UserProvider = ({ children }) => {
       localStorage.setItem("@kenzie-hub:token", JSON.stringify(token));
 
       setUser(user);
-      navigate("/home", { replace: true });
+      navigate("/", { replace: true });
     });
   }
 

@@ -1,14 +1,12 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { UserContext } from "../../../providers/user";
+import { TechContext } from "../../../providers/tech";
 import Button from "../../../styles/button";
 import { ContentContainer, ThemeContainer } from "../../../styles/containers";
 import TechCard from "./TechCard";
 
 const TechList = () => {
-  const {
-    user: { techs },
-  } = useContext(UserContext);
+  const { techs } = useContext(TechContext);
 
   return (
     <main>

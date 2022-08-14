@@ -1,13 +1,13 @@
-import UserProvider from "./providers/user";
+import Providers from "./providers";
 import Routes from "./routes";
 import Global from "./styles/global";
 
 function App() {
   return (
-    <UserProvider>
+    <Providers>
       <Global />
       <Routes />
-    </UserProvider>
+    </Providers>
   );
 }
 
