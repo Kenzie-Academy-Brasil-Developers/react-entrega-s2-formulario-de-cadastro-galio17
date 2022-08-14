@@ -18,21 +18,25 @@ const TechList = () => {
           </Link>
         </div>
         <ThemeContainer>
-          {techs.length ? (
-            <ul>
-              {techs.map((tech) => (
-                <TechCard tech={tech} />
-              ))}
-            </ul>
+          {techs ? (
+            techs.length ? (
+              <ul>
+                {techs.map((tech) => (
+                  <TechCard tech={tech} />
+                ))}
+              </ul>
+            ) : (
+              <div>
+                <strong>Você ainda não possui nenhum tecnologia</strong>
+                <Link to="tech/new">
+                  <Button size="big" theme="primary">
+                    Adicione
+                  </Button>
+                </Link>
+              </div>
+            )
           ) : (
-            <div>
-              <strong>Você ainda não possui nenhum tecnologia</strong>
-              <Link to="tech/new">
-                <Button size="big" theme="primary">
-                  Adicione
-                </Button>
-              </Link>
-            </div>
+            <div>Carregando...</div>
           )}
         </ThemeContainer>
       </ContentContainer>
