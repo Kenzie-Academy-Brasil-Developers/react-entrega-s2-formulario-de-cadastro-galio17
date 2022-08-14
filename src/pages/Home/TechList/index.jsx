@@ -22,7 +22,7 @@ const TechList = () => {
             techs.length ? (
               <ul>
                 {techs.map((tech) => (
-                  <TechCard tech={tech} />
+                  <TechCard tech={tech} key={tech.id} />
                 ))}
               </ul>
             ) : (
