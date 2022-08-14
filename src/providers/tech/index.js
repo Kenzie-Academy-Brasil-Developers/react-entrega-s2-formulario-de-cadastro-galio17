@@ -21,7 +21,7 @@ const TechProvider = ({ children }) => {
   const [techs, setTechs] = useState(null);
 
   useEffect(() => {
-    user && setTechs(user.techs);
+    if (user) setTechs(user.techs);
   }, [user]);
 
   return (
