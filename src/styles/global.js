@@ -59,8 +59,14 @@ const Global = createGlobalStyle`
   }
 
   body {
+    min-width: 100vw;
+    height: 100vh;
     background-color: var(--grey-4);
     color: var(--default-color);
+  }
+
+  #root {
+    height: 100%;
   }
 
   h1 {

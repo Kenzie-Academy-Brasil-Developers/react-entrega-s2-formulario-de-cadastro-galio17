@@ -5,6 +5,7 @@ import Button from "../../../styles/button";
 import { ContentContainer, ThemeContainer } from "../../../styles/containers";
 import TechCard from "./TechCard";
 import { FaPlus } from "react-icons/fa";
+import Loading from "../../../components/Loading";
 
 const TechList = () => {
   const { techs, loadingTech } = useContext(TechContext);
@@ -22,7 +23,7 @@ const TechList = () => {
         </div>
         <ThemeContainer className="techs-container">
           {loadingTech ? (
-            <div>Carregando...</div>
+            <Loading size="100px" />
           ) : techs.length ? (
             <ul>
               {techs.map((tech) => (
