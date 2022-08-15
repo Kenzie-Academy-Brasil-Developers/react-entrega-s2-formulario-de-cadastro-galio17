@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ThemeContainer } from "../../styles/containers";
+import ModalContainer from "./styles";
+import { FaTimes } from "react-icons/fa";
 
 const Modal = ({ children, title }) => {
   const modalContent = useRef();
@@ -23,17 +25,19 @@ const Modal = ({ children, title }) => {
   }, [navigate]);
 
   return (
-    <div>
+    <ModalContainer>
       <ThemeContainer ref={modalContent}>
         <div>
           <h4>{title}</h4>
           <Link to="/" replace>
-            <button>excluir</button>
+            <button>
+              <FaTimes />
+            </button>
           </Link>
         </div>
         {children}
       </ThemeContainer>
-    </div>
+    </ModalContainer>
   );
 };
 

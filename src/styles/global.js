@@ -21,6 +21,7 @@ const Global = createGlobalStyle`
 
     /* Other Palette */
     --default-background: #111111;
+    --shadow-background: #11111160;
     --default-color: #EFEFEF;
 
     /* Typograph */

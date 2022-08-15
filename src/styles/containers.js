@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const ThemeContainer = styled.div`
   background-color: var(--grey-3);
   border-radius: 4px;
-  overflow: hidden;
 `;
 
 export const ContentContainer = styled.div`
