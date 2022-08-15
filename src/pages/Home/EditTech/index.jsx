@@ -17,10 +17,30 @@ import { FormContainer } from "../../../styles/containers";
 
 const EditTech = () => {
   function submitEditedTech(formData) {
-    console.log(formData);
+    async function handleEditTech() {
+      try {
+        await editTech(formData, id);
+      } catch ({ response: { data } }) {
+        console.error(data);
+      }
+    }
+
+    handleEditTech();
   }
 
-  const { techs } = useContext(TechContext);
+  function clickToDeleteTech() {
+    async function handleDeleteTech() {
+      try {
+        await deleteTech(id);
+      } catch ({ response: { data } }) {
+        console.error(data);
+      }
+    }
+
+    handleDeleteTech();
+  }
+
+  const { techs, editTech, deleteTech } = useContext(TechContext);
   const { id } = useParams();
   const tech = techs?.find(({ id: searchId }) => searchId === id);
 
@@ -65,7 +85,12 @@ const EditTech = () => {
           <Button type="submit" size="big" theme="primary">
             Salvar alterações
           </Button>
-          <Button type="button" size="big" theme="secondary">
+          <Button
+            type="button"
+            size="big"
+            theme="secondary"
+            onClick={clickToDeleteTech}
+          >
             Excluir
           </Button>
         </div>

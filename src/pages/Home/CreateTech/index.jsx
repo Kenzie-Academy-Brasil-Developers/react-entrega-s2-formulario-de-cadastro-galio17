@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import {
   FormInput,
@@ -8,13 +8,24 @@ import {
   techStatusOptions,
 } from "../../../components/FormFields";
 import Modal from "../../../components/Modal";
+import { TechContext } from "../../../providers/tech";
 import Button from "../../../styles/button";
 import { FormContainer } from "../../../styles/containers";
 
 const CreateTech = () => {
   function submitNewTech(formData) {
-    console.log(formData);
+    async function handleCreateTech() {
+      try {
+        await createTech(formData);
+      } catch ({ response: { data } }) {
+        console.error(data);
+      }
+    }
+
+    handleCreateTech();
   }
+
+  const { createTech } = useContext(TechContext);
 
   const {
     register,

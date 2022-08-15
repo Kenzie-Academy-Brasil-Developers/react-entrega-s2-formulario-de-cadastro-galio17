@@ -6,7 +6,7 @@ import { ContentContainer, ThemeContainer } from "../../../styles/containers";
 import TechCard from "./TechCard";
 
 const TechList = () => {
-  const { techs } = useContext(TechContext);
+  const { techs, loadingTech } = useContext(TechContext);
 
   return (
     <main>
@@ -18,25 +18,23 @@ const TechList = () => {
           </Link>
         </div>
         <ThemeContainer>
-          {techs ? (
-            techs.length ? (
-              <ul>
-                {techs.map((tech) => (
-                  <TechCard tech={tech} key={tech.id} />
-                ))}
-              </ul>
-            ) : (
-              <div>
-                <strong>Você ainda não possui nenhum tecnologia</strong>
-                <Link to="tech/new">
-                  <Button size="big" theme="primary">
-                    Adicione
-                  </Button>
-                </Link>
-              </div>
-            )
-          ) : (
+          {loadingTech ? (
             <div>Carregando...</div>
+          ) : techs.length ? (
+            <ul>
+              {techs.map((tech) => (
+                <TechCard tech={tech} key={tech.id} />
+              ))}
+            </ul>
+          ) : (
+            <div>
+              <strong>Você ainda não possui nenhum tecnologia</strong>
+              <Link to="tech/new">
+                <Button size="big" theme="primary">
+                  Adicione
+                </Button>
+              </Link>
+            </div>
           )}
         </ThemeContainer>
       </ContentContainer>
