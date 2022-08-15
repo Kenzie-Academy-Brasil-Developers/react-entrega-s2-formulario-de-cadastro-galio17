@@ -70,10 +70,10 @@ const HomePage = styled.div`
 
       li {
         background-color: var(--grey-4);
-        padding: 12px;
         border-radius: 4px;
 
         a {
+          padding: 12px;
           display: flex;
           flex-direction: row;
           justify-content: space-between;
