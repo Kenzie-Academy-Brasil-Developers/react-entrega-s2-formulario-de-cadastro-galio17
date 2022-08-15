@@ -24,10 +24,20 @@ const SignInForm = () => {
           isLoading: false,
           autoClose: 2000,
         });
-      } catch ({ response: { data } }) {
-        console.error(data);
+      } catch (error) {
+        const {
+          response: {
+            data: { message },
+          },
+        } = error;
+
+        console.error(error);
+
         toast.update(signInNotify, {
-          render: "Erro ao cadastrar",
+          render:
+            message === "Email already exists"
+              ? "Email já cadastrado"
+              : "Erro inesperado",
           type: "error",
           isLoading: false,
           autoClose: 2000,

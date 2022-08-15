@@ -14,16 +14,27 @@ const LoginForm = () => {
       const loginNotify = toast.loading("Um momento...");
       try {
         await login(formData);
+
         toast.update(loginNotify, {
           render: "Login efetuado com sucesso",
           type: "success",
           isLoading: false,
           autoClose: 2000,
         });
-      } catch ({ response: { data } }) {
-        console.error(data);
+      } catch (error) {
+        const {
+          response: {
+            data: { message },
+          },
+        } = error;
+
+        console.error(error);
+
         toast.update(loginNotify, {
-          render: "Erro ao logar",
+          render:
+            message === "Incorrect email / password combination"
+              ? "Email ou senha incorreta"
+              : "Erro inesperado",
           type: "error",
           isLoading: false,
           autoClose: 2000,

@@ -19,16 +19,28 @@ const CreateTech = () => {
       const techNotify = toast.loading("Um momento...");
       try {
         await createTech(formData);
+
         toast.update(techNotify, {
           render: "Tecnologia criada com sucesso",
           type: "success",
           isLoading: false,
           autoClose: 2000,
         });
-      } catch ({ response: { data } }) {
-        console.error(data);
+      } catch (error) {
+        const {
+          response: {
+            data: { message },
+          },
+        } = error;
+
+        console.error(error);
+
         toast.update(techNotify, {
-          render: "Erro ao criar tecnologia",
+          render:
+            message ===
+            "User Already have this technology created you can only update it"
+              ? "Tecnologia já existente"
+              : "Erro ao criar tecnologia",
           type: "error",
           isLoading: false,
           autoClose: 2000,
