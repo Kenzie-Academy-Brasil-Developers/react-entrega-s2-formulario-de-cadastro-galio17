@@ -4,6 +4,7 @@ import { TechContext } from "../../../providers/tech";
 import Button from "../../../styles/button";
 import { ContentContainer, ThemeContainer } from "../../../styles/containers";
 import TechCard from "./TechCard";
+import { FaPlus } from "react-icons/fa";
 
 const TechList = () => {
   const { techs, loadingTech } = useContext(TechContext);
@@ -12,12 +13,14 @@ const TechList = () => {
     <main>
       <ContentContainer>
         <div>
-          <h3>Tacnologias</h3>
+          <h3>Tecnologias</h3>
           <Link to="tech/new">
-            <Button size="small">+</Button>
+            <Button size="small">
+              <FaPlus />
+            </Button>
           </Link>
         </div>
-        <ThemeContainer>
+        <ThemeContainer className="techs-container">
           {loadingTech ? (
             <div>Carregando...</div>
           ) : techs.length ? (

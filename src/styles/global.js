@@ -53,6 +53,10 @@ const Global = createGlobalStyle`
     text-decoration: none;
   }
 
+  ul, li {
+    list-style: none;
+  }
+
   body {
     background-color: var(--grey-4);
     color: var(--default-color);
@@ -66,6 +70,10 @@ const Global = createGlobalStyle`
 
   h2, h3 {
     font: var(--title-1);
+  }
+
+  h4 {
+    font: var(--title-3)
   }
 
   span {
