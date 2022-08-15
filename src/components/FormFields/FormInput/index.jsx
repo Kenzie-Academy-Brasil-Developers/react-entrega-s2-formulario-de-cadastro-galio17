@@ -5,6 +5,7 @@ export const FormInput = ({
   id,
   type,
   placeholder,
+  disabled,
   label,
   seeButton,
   register,
@@ -20,6 +21,7 @@ export const FormInput = ({
           id={id}
           type={seePassword ? "text" : type}
           placeholder={placeholder}
+          disabled={disabled}
           {...register(id)}
         />
         {(seeButton || error[id]) && (

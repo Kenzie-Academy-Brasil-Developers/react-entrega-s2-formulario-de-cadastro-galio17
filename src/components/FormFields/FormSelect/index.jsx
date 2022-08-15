@@ -18,7 +18,7 @@ export const FormSelect = ({
       <div>
         <Controller
           control={control}
-          name="course_module"
+          name={id}
           render={({ field: { value, onChange, ...field } }) => {
             return (
               <Select

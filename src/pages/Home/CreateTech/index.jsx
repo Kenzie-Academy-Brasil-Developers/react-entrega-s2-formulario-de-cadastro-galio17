@@ -1,26 +1,48 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import React from "react";
-import { FormInput } from "../../../components/FormFields/FormInput";
-import { FormSelect } from "../../../components/FormFields/FormSelect";
-import { techStatusOptions } from "../../../components/FormFields/utils/options";
+import { useForm } from "react-hook-form";
+import {
+  FormInput,
+  FormSelect,
+  techSchema,
+  techStatusOptions,
+} from "../../../components/FormFields";
 import Modal from "../../../components/Modal";
 import Button from "../../../styles/button";
 import { FormContainer } from "../../../styles/containers";
 
 const CreateTech = () => {
+  function submitNewTech(formData) {
+    console.log(formData);
+  }
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(techSchema()),
+  });
+
   return (
     <Modal title="Cadastrar Tecnologia">
-      <FormContainer>
+      <FormContainer onSubmit={handleSubmit(submitNewTech)}>
         <FormInput
           id="title"
           type="text"
           placeholder="Nome da tecnologia"
           label="Nome"
+          register={register}
+          error={errors}
         />
         <FormSelect
           id="status"
           placeholder="Status da tecnologia"
           label="Selecionar Status"
           options={techStatusOptions}
+          control={control}
+          error={errors}
         />
         <Button type="submit" size="big" theme="primary">
           Cadastrar Tecnologia
