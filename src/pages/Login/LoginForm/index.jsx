@@ -6,14 +6,32 @@ import { Link } from "react-router-dom";
 import Button from "../../../styles/button";
 import { FormContainer, ThemeContainer } from "../../../styles/containers";
 import { UserContext } from "../../../providers/user";
+import { toast } from "react-toastify";
 
 const LoginForm = () => {
   function submitLogin(formData) {
-    try {
-      login(formData);
-    } catch ({ response }) {
-      console.error(response);
+    async function handleLogin() {
+      const loginNotify = toast.loading("Um momento...");
+      try {
+        await login(formData);
+        toast.update(loginNotify, {
+          render: "Login efetuado com sucesso",
+          type: "success",
+          isLoading: false,
+          autoClose: 2000,
+        });
+      } catch ({ response: { data } }) {
+        console.error(data);
+        toast.update(loginNotify, {
+          render: "Erro ao logar",
+          type: "error",
+          isLoading: false,
+          autoClose: 2000,
+        });
+      }
     }
+
+    handleLogin();
   }
 
   const { login } = useContext(UserContext);

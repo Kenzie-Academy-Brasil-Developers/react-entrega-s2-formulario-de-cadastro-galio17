@@ -10,14 +10,32 @@ import {
 import { UserContext } from "../../../providers/user";
 import Button from "../../../styles/button";
 import { FormContainer, ThemeContainer } from "../../../styles/containers";
+import { toast } from "react-toastify";
 
 const SignInForm = () => {
   function submitSignIn(formData) {
-    try {
-      signIn(formData);
-    } catch ({ response }) {
-      console.error(response);
+    async function handleSignIn() {
+      const signInNotify = toast.loading("Um momento...");
+      try {
+        await signIn(formData);
+        toast.update(signInNotify, {
+          render: "Cadastro efetuado com sucesso",
+          type: "success",
+          isLoading: false,
+          autoClose: 2000,
+        });
+      } catch ({ response: { data } }) {
+        console.error(data);
+        toast.update(signInNotify, {
+          render: "Erro ao cadastrar",
+          type: "error",
+          isLoading: false,
+          autoClose: 2000,
+        });
+      }
     }
+
+    handleSignIn();
   }
 
   const { signIn } = useContext(UserContext);

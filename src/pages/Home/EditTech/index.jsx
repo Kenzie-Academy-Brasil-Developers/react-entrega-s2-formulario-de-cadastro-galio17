@@ -14,14 +14,28 @@ import Modal from "../../../components/Modal";
 import { TechContext } from "../../../providers/tech";
 import Button from "../../../styles/button";
 import { FormContainer } from "../../../styles/containers";
+import { toast } from "react-toastify";
 
 const EditTech = () => {
   function submitEditedTech(formData) {
     async function handleEditTech() {
+      const techNotify = toast.loading("Um momento...");
       try {
         await editTech(formData, id);
+        toast.update(techNotify, {
+          render: "Tecnologia editada com sucesso",
+          type: "success",
+          isLoading: false,
+          autoClose: 2000,
+        });
       } catch ({ response: { data } }) {
         console.error(data);
+        toast.update(techNotify, {
+          render: "Erro ao editar tecnologia",
+          type: "error",
+          isLoading: false,
+          autoClose: 2000,
+        });
       }
     }
 
@@ -30,10 +44,23 @@ const EditTech = () => {
 
   function clickToDeleteTech() {
     async function handleDeleteTech() {
+      const techNotify = toast.loading("Um momento...");
       try {
         await deleteTech(id);
+        toast.update(techNotify, {
+          render: "Tecnologia deletada com sucesso",
+          type: "success",
+          isLoading: false,
+          autoClose: 2000,
+        });
       } catch ({ response: { data } }) {
         console.error(data);
+        toast.update(techNotify, {
+          render: "Erro ao deletar tecnologia",
+          type: "error",
+          isLoading: false,
+          autoClose: 2000,
+        });
       }
     }
 

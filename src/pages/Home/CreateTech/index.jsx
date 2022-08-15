@@ -11,14 +11,28 @@ import Modal from "../../../components/Modal";
 import { TechContext } from "../../../providers/tech";
 import Button from "../../../styles/button";
 import { FormContainer } from "../../../styles/containers";
+import { toast } from "react-toastify";
 
 const CreateTech = () => {
   function submitNewTech(formData) {
     async function handleCreateTech() {
+      const techNotify = toast.loading("Um momento...");
       try {
         await createTech(formData);
+        toast.update(techNotify, {
+          render: "Tecnologia criada com sucesso",
+          type: "success",
+          isLoading: false,
+          autoClose: 2000,
+        });
       } catch ({ response: { data } }) {
         console.error(data);
+        toast.update(techNotify, {
+          render: "Erro ao criar tecnologia",
+          type: "error",
+          isLoading: false,
+          autoClose: 2000,
+        });
       }
     }
 
