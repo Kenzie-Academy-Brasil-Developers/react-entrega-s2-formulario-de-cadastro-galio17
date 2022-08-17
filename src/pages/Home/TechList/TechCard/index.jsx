@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const TechCard = ({ tech: { id, title, status } }) => {
   return (
-    <li key={id}>
+    <li>
       <Link to={`tech/${id}`}>
         <h4>{title}</h4>
         <span>{status}</span>

@@ -10,17 +10,45 @@ import {
 import { UserContext } from "../../../providers/user";
 import Button from "../../../styles/button";
 import { FormContainer, ThemeContainer } from "../../../styles/containers";
+import { toast } from "react-toastify";
 
 const SignInForm = () => {
   function submitSignIn(formData) {
-    try {
-      sign(formData);
-    } catch ({ response }) {
-      console.error(response);
+    async function handleSignIn() {
+      const signInNotify = toast.loading("Um momento...");
+      try {
+        await signIn(formData);
+        toast.update(signInNotify, {
+          render: "Cadastro efetuado com sucesso",
+          type: "success",
+          isLoading: false,
+          autoClose: 2000,
+        });
+      } catch (error) {
+        const {
+          response: {
+            data: { message },
+          },
+        } = error;
+
+        console.error(error);
+
+        toast.update(signInNotify, {
+          render:
+            message === "Email already exists"
+              ? "Email já cadastrado"
+              : "Erro inesperado",
+          type: "error",
+          isLoading: false,
+          autoClose: 2000,
+        });
+      }
     }
+
+    handleSignIn();
   }
 
-  const { sign } = useContext(UserContext);
+  const { signIn } = useContext(UserContext);
 
   const {
     register,

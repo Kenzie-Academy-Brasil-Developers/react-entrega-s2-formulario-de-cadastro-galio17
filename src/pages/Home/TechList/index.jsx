@@ -1,29 +1,33 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { UserContext } from "../../../providers/user";
+import { TechContext } from "../../../providers/tech";
 import Button from "../../../styles/button";
 import { ContentContainer, ThemeContainer } from "../../../styles/containers";
 import TechCard from "./TechCard";
+import { FaPlus } from "react-icons/fa";
+import Loading from "../../../components/Loading";
 
 const TechList = () => {
-  const {
-    user: { techs },
-  } = useContext(UserContext);
+  const { techs, loadingTech } = useContext(TechContext);
 
   return (
     <main>
       <ContentContainer>
         <div>
-          <h3>Tacnologias</h3>
+          <h3>Tecnologias</h3>
           <Link to="tech/new">
-            <Button size="small">+</Button>
+            <Button size="small">
+              <FaPlus />
+            </Button>
           </Link>
         </div>
-        <ThemeContainer>
-          {techs.length ? (
+        <ThemeContainer className="techs-container">
+          {loadingTech ? (
+            <Loading size="100px" />
+          ) : techs.length ? (
             <ul>
               {techs.map((tech) => (
-                <TechCard tech={tech} />
+                <TechCard tech={tech} key={tech.id} />
               ))}
             </ul>
           ) : (

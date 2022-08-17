@@ -11,7 +11,10 @@ const Home = () => {
 
   return (
     <HomePage>
-      <Header button="Sair" onClick={() => localStorage.clear()} />
+      <Header
+        button="Sair"
+        onClick={() => localStorage.removeItem("@kenzie-hub:token")}
+      />
       <section>
         <ContentContainer>
           <h2>Olá, {user.name}</h2>

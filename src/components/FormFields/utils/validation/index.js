@@ -27,3 +27,12 @@ export const SignInSchema = yup.object().shape({
   contact: yup.string().required("Contato obrigatório"),
   course_module: yup.string().required("Módulo obrigatório"),
 });
+
+export const techSchema = (actualStatus) =>
+  yup.object().shape({
+    title: yup.string().required("Nome obrigatório"),
+    status: yup
+      .string()
+      .required("Status Obrigatório")
+      .notOneOf([actualStatus], "Status deve ser diferente do atual"),
+  });

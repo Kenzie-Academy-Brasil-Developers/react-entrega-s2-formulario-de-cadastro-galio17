@@ -21,14 +21,65 @@ const HomePage = styled.div`
   main {
     padding: 10px 0;
 
-    div {
+    > div {
       display: flex;
       flex-direction: column;
       gap: 23px;
+
+      div {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .techs-container {
+        padding: 23px 26px;
+
+        div {
+          flex-direction: column;
+          gap: 10px;
+          text-align: center;
+
+          a {
+            width: 100%;
+            flex: 1;
+
+            button {
+              width: 100%;
+            }
+          }
+
+          @media (min-width: 400px) {
+            flex-direction: row;
+            text-align: left;
+
+            a {
+              max-width: max-content;
+            }
+          }
+        }
+      }
     }
 
-    strong {
-      font: var(--title-1);
+    ul {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+
+      li {
+        background-color: var(--grey-4);
+        border-radius: 4px;
+
+        a {
+          padding: 12px;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+        }
+      }
     }
   }
 `;
