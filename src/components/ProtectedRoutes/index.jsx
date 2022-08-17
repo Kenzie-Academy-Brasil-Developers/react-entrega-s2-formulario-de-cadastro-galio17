@@ -10,7 +10,7 @@ const ProtectedRoutes = () => {
     return <Loading size="200px" />;
   }
 
-  return user ? <Outlet /> : <Navigate to="/register/login" replace />;
+  return user ? <Outlet /> : <Navigate to="/login" replace />;
 };
 
 export default ProtectedRoutes;
