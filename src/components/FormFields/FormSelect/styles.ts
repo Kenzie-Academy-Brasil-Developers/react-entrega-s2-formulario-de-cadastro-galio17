@@ -1,16 +1,19 @@
-const selectStyle = {
+import { StylesConfig } from "react-select";
+import { ISelectOption } from "../utils/options";
+
+const selectStyle: StylesConfig<ISelectOption> = {
   control: (styles, { isFocused }) => ({
     ...styles,
     backgroundColor: "var(--grey-2)",
     boxShadow: "none",
     borderColor: isFocused ? "var(--grey-0)" : "transparent",
-    color: isFocused && "var(--grey-0)",
+    color: isFocused ? "var(--grey-0)" : undefined,
     justifyContent: "flex-end",
   }),
-  indicatorSeparator: () => null,
-  placeholder: (styles, states) => ({
+  indicatorSeparator: () => ({}),
+  placeholder: (styles, { isFocused }) => ({
     ...styles,
-    color: states.isFocused ? "var(--grey-0)" : "var(--grey-1)",
+    color: isFocused ? "var(--grey-0)" : "var(--grey-1)",
   }),
   singleValue: (styles) => ({
     ...styles,
@@ -19,7 +22,7 @@ const selectStyle = {
   menu: (styles) => ({ ...styles, backgroundColor: "var(--grey-2)" }),
   option: (styles, { isFocused }) => ({
     ...styles,
-    backgroundColor: isFocused && "var(--grey-3)",
+    backgroundColor: isFocused ? "var(--grey-3)" : undefined,
   }),
 };
 

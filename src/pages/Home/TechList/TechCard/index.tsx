@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { ITech } from "../../../../providers/tech";
 
-const TechCard = ({ tech: { id, title, status } }) => {
+interface ITechCardProps {
+  tech: ITech;
+}
+
+const TechCard = ({ tech: { id, title, status } }: ITechCardProps) => {
   return (
     <li>
       <Link to={`tech/${id}`}>

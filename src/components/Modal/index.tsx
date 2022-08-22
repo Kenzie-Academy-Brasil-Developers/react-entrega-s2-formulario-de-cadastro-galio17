@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEventHandler, ReactNode } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,13 +6,18 @@ import { ThemeContainer } from "../../styles/containers";
 import ModalContainer from "./styles";
 import { FaTimes } from "react-icons/fa";
 
-const Modal = ({ children, title }) => {
-  const modalContent = useRef();
+interface IModalProps {
+  children: ReactNode;
+  title: string;
+}
+
+const Modal = ({ children, title }: IModalProps) => {
+  const modalContent = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    function handleOutClick(event) {
-      if (!modalContent.current.contains(event.target)) {
+    function handleOutClick(event: MouseEvent) {
+      if (!modalContent.current?.contains(event.target as Node)) {
         navigate("/", { replace: true });
       }
     }

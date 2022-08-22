@@ -1,8 +1,15 @@
 import React from "react";
-import { Controller } from "react-hook-form";
+import { Control, Controller, UseFormRegister } from "react-hook-form";
 import { FaExclamationCircle } from "react-icons/fa";
 import Select, { components } from "react-select";
+import { IFormFieldProps } from "..";
+import { ISelectOption } from "../utils/options";
 import selectStyle from "./styles";
+
+interface IFormSelectProps extends IFormFieldProps {
+  options: ISelectOption[];
+  control: Control<any>;
+}
 
 export const FormSelect = ({
   id,
@@ -11,7 +18,11 @@ export const FormSelect = ({
   label,
   error,
   control,
-}) => {
+}: IFormSelectProps) => {
+  function onChangeOption(e: ISelectOption, onChange: (value: string) => void) {
+    onChange(e.value);
+  }
+
   return (
     <>
       <label htmlFor={id}>{label}</label>
@@ -27,10 +38,10 @@ export const FormSelect = ({
                 styles={selectStyle}
                 options={options}
                 {...field}
-                onChange={(e) => onChange(e.value)}
+                onChange={(e) => onChangeOption(e as ISelectOption, onChange)}
                 value={options.find((option) => option.value === value)}
                 menuPlacement="auto"
-                closeMenuOnScroll="true"
+                closeMenuOnScroll={true}
                 components={{
                   IndicatorsContainer: ({ children, ...props }) => (
                     <>

@@ -1,5 +1,14 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { UseFormRegister } from "react-hook-form";
 import { FaEye, FaEyeSlash, FaExclamationCircle } from "react-icons/fa";
+import { IFormFieldProps } from "..";
+
+interface IFormInputProps extends IFormFieldProps {
+  type: string;
+  disabled?: boolean;
+  seeButton?: boolean;
+  register: UseFormRegister<any>;
+}
 
 export const FormInput = ({
   id,
@@ -10,7 +19,7 @@ export const FormInput = ({
   seeButton,
   register,
   error,
-}) => {
+}: IFormInputProps) => {
   const [seePassword, setSeePassword] = useState(false);
 
   return (
@@ -30,7 +39,7 @@ export const FormInput = ({
               <button
                 type="button"
                 onClick={(e) => {
-                  e.nativeEvent.composedPath()[2].firstChild.focus();
+                  console.log(e);
                   setSeePassword(!seePassword);
                 }}
               >

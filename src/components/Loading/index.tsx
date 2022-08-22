@@ -1,7 +1,7 @@
 import React from "react";
-import StyledLoading from "./styles";
+import StyledLoading, { ILoadingProps } from "./styles";
 
-const Loading = ({ size }) => {
+const Loading = ({ size }: ILoadingProps) => {
   return (
     <StyledLoading size={size}>
       <div className="circle"></div>

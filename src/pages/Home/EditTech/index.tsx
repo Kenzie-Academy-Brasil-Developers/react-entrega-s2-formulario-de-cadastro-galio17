@@ -11,25 +11,25 @@ import {
   techStatusOptions,
 } from "../../../components/FormFields";
 import Modal from "../../../components/Modal";
-import { TechContext } from "../../../providers/tech";
+import { ITech, TechContext } from "../../../providers/tech";
 import Button from "../../../styles/button";
 import { FormContainer } from "../../../styles/containers";
 import { toast } from "react-toastify";
 
 const EditTech = () => {
-  function submitEditedTech(formData) {
+  function submitEditedTech(formData: ITech) {
     async function handleEditTech() {
       const techNotify = toast.loading("Um momento...");
       try {
-        await editTech(formData, id);
+        await editTech(formData, id as string);
         toast.update(techNotify, {
           render: "Tecnologia editada com sucesso",
           type: "success",
           isLoading: false,
           autoClose: 2000,
         });
-      } catch ({ response: { data } }) {
-        console.error(data);
+      } catch (error) {
+        console.error(error);
         toast.update(techNotify, {
           render: "Erro ao editar tecnologia",
           type: "error",
@@ -46,15 +46,15 @@ const EditTech = () => {
     async function handleDeleteTech() {
       const techNotify = toast.loading("Um momento...");
       try {
-        await deleteTech(id);
+        await deleteTech(id as string);
         toast.update(techNotify, {
           render: "Tecnologia deletada com sucesso",
           type: "success",
           isLoading: false,
           autoClose: 2000,
         });
-      } catch ({ response: { data } }) {
-        console.error(data);
+      } catch (error) {
+        console.error(error);
         toast.update(techNotify, {
           render: "Erro ao deletar tecnologia",
           type: "error",
@@ -77,7 +77,7 @@ const EditTech = () => {
     control,
     setValue,
     formState: { errors },
-  } = useForm({
+  } = useForm<ITech>({
     resolver: yupResolver(techSchema(tech?.status)),
   });
 

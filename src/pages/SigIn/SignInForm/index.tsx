@@ -7,13 +7,15 @@ import {
   moduleOptions,
   SignInSchema,
 } from "../../../components/FormFields";
-import { UserContext } from "../../../providers/user";
+import { IUserForm, UserContext } from "../../../providers/user";
 import Button from "../../../styles/button";
 import { FormContainer, ThemeContainer } from "../../../styles/containers";
 import { toast } from "react-toastify";
+import axios, { AxiosError } from "axios";
+import { IAxiosError } from "../../../services";
 
 const SignInForm = () => {
-  function submitSignIn(formData) {
+  function submitSignIn(formData: IUserForm) {
     async function handleSignIn() {
       const signInNotify = toast.loading("Um momento...");
       try {
@@ -25,11 +27,8 @@ const SignInForm = () => {
           autoClose: 2000,
         });
       } catch (error) {
-        const {
-          response: {
-            data: { message },
-          },
-        } = error;
+        const axiosError = error as AxiosError<IAxiosError>;
+        const message = axiosError.response?.data.message;
 
         console.error(error);
 
@@ -55,7 +54,7 @@ const SignInForm = () => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm({
+  } = useForm<IUserForm>({
     resolver: yupResolver(SignInSchema),
   });
 

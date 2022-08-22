@@ -24,10 +24,10 @@ const TechList = () => {
         <ThemeContainer className="techs-container">
           {loadingTech ? (
             <Loading size="100px" />
-          ) : techs.length ? (
+          ) : techs?.length ? (
             <ul>
-              {techs.map((tech) => (
-                <TechCard tech={tech} key={tech.id} />
+              {techs?.map((tech) => (
+                <TechCard tech={tech} key={tech?.id} />
               ))}
             </ul>
           ) : (

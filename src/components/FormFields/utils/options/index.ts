@@ -1,4 +1,9 @@
-export const moduleOptions = [
+export interface ISelectOption {
+  value: string;
+  label: string;
+}
+
+export const moduleOptions: ISelectOption[] = [
   {
     value: "Primeiro módulo (Introdução ao Frontend)",
     label: "Primeiro módulo (Introdução ao Frontend)",
@@ -17,7 +22,7 @@ export const moduleOptions = [
   },
 ];
 
-export const techStatusOptions = [
+export const techStatusOptions: ISelectOption[] = [
   {
     value: "Iniciante",
     label: "Iniciante",

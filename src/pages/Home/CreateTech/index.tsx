@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import {
   FormInput,
@@ -8,13 +8,15 @@ import {
   techStatusOptions,
 } from "../../../components/FormFields";
 import Modal from "../../../components/Modal";
-import { TechContext } from "../../../providers/tech";
+import { ITech, TechContext } from "../../../providers/tech";
 import Button from "../../../styles/button";
 import { FormContainer } from "../../../styles/containers";
 import { toast } from "react-toastify";
+import { AxiosError } from "axios";
+import { IAxiosError } from "../../../services";
 
 const CreateTech = () => {
-  function submitNewTech(formData) {
+  function submitNewTech(formData: ITech) {
     async function handleCreateTech() {
       const techNotify = toast.loading("Um momento...");
       try {
@@ -27,13 +29,10 @@ const CreateTech = () => {
           autoClose: 2000,
         });
       } catch (error) {
-        const {
-          response: {
-            data: { message },
-          },
-        } = error;
+        const axiosError = error as AxiosError<IAxiosError>;
+        const message = axiosError.response?.data.message;
 
-        console.error(error);
+        console.log(error);
 
         toast.update(techNotify, {
           render:
@@ -58,7 +57,7 @@ const CreateTech = () => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm({
+  } = useForm<ITech>({
     resolver: yupResolver(techSchema()),
   });
 
