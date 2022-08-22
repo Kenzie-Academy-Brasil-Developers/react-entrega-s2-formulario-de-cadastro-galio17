@@ -28,7 +28,7 @@ export const SignInSchema = yup.object().shape({
   course_module: yup.string().required("Módulo obrigatório"),
 });
 
-export const techSchema = (actualStatus) =>
+export const techSchema = (actualStatus?: string) =>
   yup.object().shape({
     title: yup.string().required("Nome obrigatório"),
     status: yup

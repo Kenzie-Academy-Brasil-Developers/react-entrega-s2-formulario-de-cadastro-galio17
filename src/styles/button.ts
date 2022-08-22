@@ -1,6 +1,11 @@
 import styled, { css } from "styled-components";
 
-const Button = styled.button`
+interface IButtonProps {
+  size?: string;
+  theme?: string;
+}
+
+const Button = styled.button<IButtonProps>`
   color: var(--grey-0);
   border-radius: 4px;
 

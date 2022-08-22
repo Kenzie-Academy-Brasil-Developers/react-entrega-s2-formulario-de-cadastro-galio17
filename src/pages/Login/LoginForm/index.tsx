@@ -5,11 +5,13 @@ import { FormInput, loginSchema } from "../../../components/FormFields";
 import { Link } from "react-router-dom";
 import Button from "../../../styles/button";
 import { FormContainer, ThemeContainer } from "../../../styles/containers";
-import { UserContext } from "../../../providers/user";
+import { IUserForm, UserContext } from "../../../providers/user";
 import { toast } from "react-toastify";
+import { AxiosError } from "axios";
+import { IAxiosError } from "../../../services";
 
 const LoginForm = () => {
-  function submitLogin(formData) {
+  function submitLogin(formData: IUserForm) {
     async function handleLogin() {
       const loginNotify = toast.loading("Um momento...");
       try {
@@ -22,11 +24,8 @@ const LoginForm = () => {
           autoClose: 2000,
         });
       } catch (error) {
-        const {
-          response: {
-            data: { message },
-          },
-        } = error;
+        const axiosError = error as AxiosError<IAxiosError>;
+        const message = axiosError.response?.data.message;
 
         console.error(error);
 
@@ -51,7 +50,7 @@ const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IUserForm>({
     resolver: yupResolver(loginSchema),
   });
 

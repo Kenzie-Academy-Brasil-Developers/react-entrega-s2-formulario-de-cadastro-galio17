@@ -1,5 +1,9 @@
 import styled, { css, keyframes } from "styled-components";
 
+export interface ILoadingProps {
+  size: string;
+}
+
 const rotateAnimation = keyframes`
   from {
     transform: rotate(0deg);
@@ -10,7 +14,7 @@ const rotateAnimation = keyframes`
   }
 `;
 
-const StyledLoading = styled.div`
+const StyledLoading = styled.div<ILoadingProps>`
   width: 100%;
   height: 100%;
   display: flex;
